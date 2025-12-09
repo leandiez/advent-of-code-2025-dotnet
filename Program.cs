@@ -1,1 +1,1 @@
-﻿Password01.Run("C:\\Users\\Leandro\\Desktop\\ProyectosGit\\advent-of-code-2025-dotnet\\password01.txt");
+﻿Password01.Run("password01.txt");

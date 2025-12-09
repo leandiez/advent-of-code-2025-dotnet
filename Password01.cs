@@ -6,8 +6,11 @@ public static class Password01
     // Password01.Run(new string[] { "mi-entrada" });
     public static void Run(string fileName = null)
     {
-        Console.WriteLine(fileName);
-        if (!File.Exists(fileName))
+        Console.WriteLine(Directory.GetCurrentDirectory());
+        string relPath = @"test.txt";
+        Console.WriteLine(relPath);
+
+        if (!File.Exists(relPath))
         {
             Console.WriteLine("File not found");
             return;
@@ -48,8 +51,8 @@ public class Dial
         // Si la suma de la posicion actual mas el movimiento se va de rango, ajusto.
         if (CurrentPosition + realAmount >= _maxPositions)
         {
+            if (CountZeroPasses && CurrentPosition != 0) ZeroPasses++;
             CurrentPosition = (CurrentPosition + realAmount) % _maxPositions;
-            if (CountZeroPasses) ZeroPasses++; // Si estoy contando todos los pases, sumo uno.
             if (!CountZeroPasses && CurrentPosition == 0) ZeroPasses++; // Si solo cuento cuando cae en cero, verifico y sumo.
             return;
         }
@@ -64,11 +67,10 @@ public class Dial
         int realAmount = AdjustAmount(amount);
         // Si la resta de la posicion actual con el movimiento se va de rango, pase por cero.
         if (CurrentPosition - realAmount <= 0)
-        {
-            //Console.WriteLine("Posicion Actual: " + CurrentPosition.ToString() + "Restando: " + realAmount.ToString());
+        {   // Si estoy contando todos los pases Y no estoy en cero, sumo un pasaje.
+            // !! importante ver que si ya estoy lo conte antes por eso la condicion distinto a 0
+            if (CountZeroPasses && CurrentPosition != 0) ZeroPasses++;
             CurrentPosition = (CurrentPosition - realAmount + _maxPositions) % _maxPositions; //Ajusto teniendo en cuenta que al quedar negativo tengo que sumar el maximo.
-            //Console.WriteLine("Posicion Nueva: " + CurrentPosition.ToString());
-            if (CountZeroPasses) ZeroPasses++; // Si estoy contando todos los pases, sumo uno.
             if (!CountZeroPasses && CurrentPosition == 0) ZeroPasses++; // Si solo cuento cuando cae en cero, verifico y sumo.
             return;
         }
