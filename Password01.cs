@@ -6,9 +6,7 @@ public static class Password01
     // Password01.Run(new string[] { "mi-entrada" });
     public static void Run(string fileName = null)
     {
-        Console.WriteLine(Directory.GetCurrentDirectory());
-        string relPath = @"test.txt";
-        Console.WriteLine(relPath);
+        string relPath = @fileName;
 
         if (!File.Exists(relPath))
         {
@@ -46,7 +44,7 @@ public class Dial
 
     public void TurnRight(int amount)
     {
-        Console.WriteLine("Muevo a Derecha");
+        //Console.WriteLine("Muevo a Derecha");
         int realAmount = AdjustAmount(amount);
         // Si la suma de la posicion actual mas el movimiento se va de rango, ajusto.
         if (CurrentPosition + realAmount >= _maxPositions)
@@ -63,7 +61,7 @@ public class Dial
 
     public void TurnLeft(int amount)
     {
-        Console.WriteLine("Muevo a Izquierda");
+        //Console.WriteLine("Muevo a Izquierda");
         int realAmount = AdjustAmount(amount);
         // Si la resta de la posicion actual con el movimiento se va de rango, pase por cero.
         if (CurrentPosition - realAmount <= 0)
@@ -80,7 +78,7 @@ public class Dial
     }
     private int AdjustAmount(int initialAmount)
     {
-        Console.WriteLine("Cantidad a mover: " + initialAmount.ToString());
+        //Console.WriteLine("Cantidad a mover: " + initialAmount.ToString());
         int realAmount;
         if (CountZeroPasses)
         {
@@ -106,7 +104,7 @@ public class Dial
             // Y me quedo con un numero mas chico para calcular.
             realAmount = initialAmount % _maxPositions;
         }
-        Console.WriteLine("Pasajes por cero: " + ZeroPasses.ToString());
+        //Console.WriteLine("Pasajes por cero: " + ZeroPasses.ToString());
         return realAmount;
     }
 }
